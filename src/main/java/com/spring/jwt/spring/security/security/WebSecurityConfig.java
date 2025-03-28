@@ -41,7 +41,7 @@ public class WebSecurityConfig {
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("USERS", "MANAGERS")
                         .requestMatchers("/managers").hasAnyRole("MANAGERS")
                         .anyRequest().authenticated()

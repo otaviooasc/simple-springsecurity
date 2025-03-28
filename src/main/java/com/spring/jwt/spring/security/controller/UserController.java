@@ -1,7 +1,7 @@
 package com.spring.jwt.spring.security.controller;
 
 import com.spring.jwt.spring.security.model.User;
-import com.spring.jwt.spring.security.service.UserService;
+import com.spring.jwt.spring.security.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserServiceImpl service;
 
     @PostMapping
     public void postUser(@RequestBody User user){

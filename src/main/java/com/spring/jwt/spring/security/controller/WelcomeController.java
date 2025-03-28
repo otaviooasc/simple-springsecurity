@@ -1,20 +1,29 @@
 package com.spring.jwt.spring.security.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.spring.jwt.spring.security.model.DetalhesUsuario;
+import com.spring.jwt.spring.security.service.DetalhesUsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class WelcomeController {
+    @Autowired
+    private DetalhesUsuarioService service;
+
     @GetMapping
     public String welcome(){
         return "Welcome to My Spring Boot Web API";
     }
-    @GetMapping("/users")
-    public String users() {
-        return "Authorized user";
+
+    @GetMapping("/users/{id}")
+    public DetalhesUsuario users(@PathVariable Long id) {
+        return service.buscarDetalhes(id);
     }
-    @GetMapping("/managers")
-    public String managers() {
-        return "Authorized manager";
+    @PostMapping("/managers")
+    public ResponseEntity<DetalhesUsuario> managers(@RequestBody DetalhesUsuario detalhesUsuario) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(service.salvarDetalhe(detalhesUsuario));
     }
 }
